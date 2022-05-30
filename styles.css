@@ -175,17 +175,27 @@ button {
 }
 #timmer{
     position: absolute;
-    background-color: rgb(102, 255, 0);
-    /* animation: time 30s linear 1s infinite backwards reverse; */
+    background-color: black;
     height: 22px;
     width: 330px;
     top: 667px;
     left: 230px;
-    
+        animation: time 30s linear 1s infinite backwards ;
+}
+#timmer-back{
+    position: absolute;
+    background-color: rgb(102, 255, 0);
+    height: 22px;
+    width: 330px;
+    top: 667px;
+    left: 230px;
 }
 /* ANIMATION KEYFRAMES */
 @keyframes time{
     from{width: 0px;
+        /* transform: translateY(180deg); */
     }
-    to{width: 50px;}
+    to{width: 330px;
+        /* transform: rotateY(360deg); */
+    }
 }
