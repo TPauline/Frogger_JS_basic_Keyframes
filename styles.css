@@ -1,0 +1,191 @@
+body {
+    background-color: rgb(1, 24, 24);
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+
+button {
+    background-color: #4CAF50;
+    border: 1px solid green;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.buttons {    
+    width: 660px;
+    height: 50px;
+    display: flex;
+    margin: auto;
+    align-self: center;
+}
+
+.buttons button:hover {
+    background-color: #89df8c
+}
+
+.gameWindow {
+    height: 700px;
+    width: 660px;
+    align-self: center;
+    margin: auto;
+    border: 5px solid goldenrod;
+    border-style: groove;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.gameArea {
+    background: url(images/background.png);
+    background-repeat: no-repeat;
+    width: 660px;
+    height: 720px;
+    position: relative;
+}
+
+
+.car1{
+    position: absolute;
+    top: 77%;
+}
+
+.car2{
+    position: absolute;
+    top: 70%;
+    margin-left:10px ;
+}
+
+.car3{
+    position: absolute;
+    top: 64%;
+}
+
+.car4{
+    position: absolute;
+    top: 58%;
+}
+
+.lorry{
+    position: absolute;
+    top: 53%;
+    margin-right: 500px;
+}
+ 
+.logs1{
+    position: absolute;
+    top:260px;
+    display: flex;
+}
+
+.logs2{
+    position: absolute;
+    top:215px;
+    display: flex;
+}
+
+.logs3{
+    position: absolute;
+    top:130px;
+}
+
+.turtles1{
+    position: absolute;
+    top: 295px;
+    display: flex;
+}
+
+.turtles2{
+    position: absolute;
+    top: 165px;
+    display: flex;
+
+}
+.frogger{
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    top: 605px;
+    left: 307.5px;
+    z-index: 1;
+}
+
+.lives{
+    position: absolute;
+    top: 645px;
+    z-index: 1;
+}
+.lives img{
+    width: 22.5px;
+    height: 22.5px;
+}
+.box {
+    width: 800px;
+    height: 200px;
+    position: absolute;
+    top: 15%;
+    opacity: 0.8;
+    align-self: center;
+    margin: auto;
+    align-items: center;
+}
+
+
+.stack-top {
+    z-index: 9;
+}
+
+#timeGrid {
+    position: relative;
+    display: flex;
+    width: 600px;
+    height: 60px;
+    flex-direction: row-reverse;
+    margin: 10px 10px 10px 300px;
+}
+
+#TimeLabel,
+.title {
+    color: darkgreen;
+    font-family: 'Common Pixel', sans-serif;
+    font-size: 55px;
+}
+
+.title {
+    margin: 20px auto;
+    font-size: 150px;
+    position: relative;
+    left: 10%;
+    text-shadow: -12px -12px #FF0000;
+}
+
+.time{
+    position: absolute;
+    top: 645px;
+    left: 565px;
+}
+
+.logs2label-1-up-high-score{
+    position: absolute;
+}
+#timmer{
+    position: absolute;
+    background-color: rgb(102, 255, 0);
+    /* animation: time 30s linear 1s infinite backwards reverse; */
+    height: 22px;
+    width: 330px;
+    top: 667px;
+    left: 230px;
+    
+}
+/* ANIMATION KEYFRAMES */
+@keyframes time{
+    from{width: 0px;
+    }
+    to{width: 50px;}
+}
