@@ -4,82 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const pauseButton = document.querySelector('#pause')
     const resetButton = document.querySelector('#reset')
     const soundButton = document.querySelector('#sound')
-    const car1s = document.querySelectorAll('.car1')
-    const car2s = document.querySelectorAll('.car2')
-    const car3s = document.querySelectorAll('.car3')
-    const car4s = document.querySelectorAll('.car4')
+    const cars1 = document.querySelectorAll('.cars1')
+    const cars2 = document.querySelectorAll('.cars2')
+    const cars3 = document.querySelectorAll('.cars3')
+    const cars4 = document.querySelectorAll('.cars4')
     const lorrys = document.querySelectorAll('.lorry')
     const frogger = document.querySelector('.frogger')
-
-
-
-
-    froggerObj = {
-        initialX: 307.5,
-        initialY: 605,
-        lives: 0,
-        livesY: 84
-    }
-
-    carsLeft = 0
-
-    for (let i = 0; i < 3; i++) {
-        if (i < 2) {
-            clone = document.querySelector(".turtles2").cloneNode(true)
-            clone.className = "turtles2"
-            gameArea.appendChild(clone)
-
-            clone = document.querySelector(".logs1").cloneNode(true)
-            clone.className = "logs1"
-            gameArea.appendChild(clone)
-
-
-            clone = document.querySelector(".logs2").cloneNode(true)
-            clone.className = "logs2"
-            gameArea.appendChild(clone)
-
-            clone = document.querySelector(".logs3").cloneNode(true)
-            clone.className = "logs3"
-            gameArea.appendChild(clone)
-        }
-        clone = document.querySelector(".turtles1").cloneNode(true)
-        clone.className = "turtles1"
-        gameArea.appendChild(clone)
-
-        clone = document.querySelector(".turtles2").cloneNode(true)
-        clone.className = "turtles2"
-        gameArea.appendChild(clone)
-
-
-    }
-
-    const turtles1 = document.querySelectorAll('.turtles1')
-    const turtles2 = document.querySelectorAll('.turtles2')
-
-    const logs1 = document.querySelectorAll('.logs1')
-    const logs2 = document.querySelectorAll('.logs2')
-    const logs3 = document.querySelectorAll('.logs3')
-
-    for (let i = 0; i < car1s.length; i++) {
-        car1s[i].style.left = carsLeft + "px"
-        car3s[i].style.left = carsLeft + "px"
-        car2s[i].style.left = carsLeft + 20 + "px"
-        car4s[i].style.left = carsLeft + 20 + "px"
-        lorrys[i].style.left = carsLeft + "px"
-
-        turtles1[i].style.left = carsLeft + "px"
-        turtles2[i].style.left = carsLeft + "px"
-
-        if (i < 3) {
-            logs1[i].style.left = carsLeft + 55 + "px"
-            logs2[i].style.left = carsLeft + 100 + "px"
-            logs3[i].style.left = carsLeft + "px"
-
-        }
-        carsLeft += 200
-    }
-
-
+    timmers= []
 
     var myMusic = new Audio(),
         win = new Audio(),
@@ -91,6 +22,157 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let play = false;
 
+    froggerObj = {
+        initialX: 307.5,
+        initialY: 603,
+        lives: 0,
+        livesY: 84
+    }
+
+    carsLeft = 0
+
+    function cloneNodes(node, num) {
+        for (let i = 0; i < num; i++) {
+            clone = document.querySelector("." + node).cloneNode(true)
+            clone.className = node
+            gameArea.appendChild(clone)
+        }
+    }
+
+    cloneNodes("turtles1", 4)
+    cloneNodes("turtles2", 3)
+    cloneNodes("logs1", 2)
+    cloneNodes("logs2", 2)
+    cloneNodes("logs3", 2)
+
+    const turtles1 = document.querySelectorAll('.turtles1')
+    const turtles2 = document.querySelectorAll('.turtles2')
+    const logs1 = document.querySelectorAll('.logs1')
+    const logs2 = document.querySelectorAll('.logs2')
+    const logs3 = document.querySelectorAll('.logs3')
+
+    console.log(turtles1)
+    function spaceNodes(nodeList, num) {
+        space = 0
+        for (let i = 0; i < nodeList.length; i++) {
+            nodeList[i].style.left = space + "px"
+            space += num
+        }
+    }
+
+    spaceNodes(cars1, 200)
+    spaceNodes(cars2, 200)
+    spaceNodes(cars3, 200)
+    spaceNodes(cars4, 200)
+    spaceNodes(lorrys, 200)
+    spaceNodes(logs1, 200)
+    spaceNodes(logs2, 500)
+    spaceNodes(logs3, 250)
+    spaceNodes(turtles1, 190)
+    spaceNodes(turtles2, 190)
+
+    function movecars(lst, speed, space) {
+        lst.forEach(car => {
+            // console.log(car.offsetLeft)
+            n = car.offsetLeft + speed
+            car.style.left = n + "px";
+            if (n > (658 + space)) {
+                car.style.left = -space + "px";
+            }
+            if (n < -space) {
+                car.style.left = (658 + space) + "px";
+            }
+        })
+    }
+ let f = false
+    // console.log(logs2[0].height)
+    // console.log(turtles1[0].getElementsByTagName('img')[0].height)  
+    function moveFrogger(e) {
+        // console.log(frogger.offsetLeft)
+        f = true
+        switch (e.code) {
+            
+            case 'ArrowUp':
+                frogger.src = "images/player-up.png"
+                if (frogger.offsetTop == 378 && frogger.offsetTop > froggerObj.livesY)
+                    frogger.style.top =  "345px"
+                else if (frogger.offsetTop > froggerObj.livesY)
+                    frogger.style.top = frogger.offsetTop - 45 + "px"
+                break;
+            case 'ArrowDown':
+                frogger.src = "images/player-down.png"
+                if (frogger.offsetTop == 300 && frogger.offsetTop < froggerObj.initialY)
+                    frogger.style.top =  "345px"
+                else if (frogger.offsetTop < froggerObj.initialY)
+                    frogger.style.top = frogger.offsetTop + 45 + "px"
+                break;
+            case 'ArrowLeft':
+                frogger.src = "images/player-left.png"
+                if (frogger.offsetLeft > 0)
+                    frogger.style.left = frogger.offsetLeft - 45 + "px"
+                break;
+            case 'ArrowRight':
+                frogger.src = "images/player-right.png"
+                if (frogger.offsetLeft < 656 - 55)
+                    frogger.style.left = frogger.offsetLeft + 45 + "px"
+                break;
+            default:
+                break;
+        }
+  
+    }
+    // console.log(logs2[0].width)
+    // console.log(turtles1[0].getElementsByTagName('img')[0].width)
+function hitObstacle(){
+    
+
+    cars2.forEach(elem => {
+     if(f){
+            console.log(f);
+         
+        }
+        
+        f = false
+    x = ( frogger.x < elem.x + elem.width && frogger.x + frogger.width >= elem.x)
+    y =(frogger.y < elem.y + elem.width && frogger.y + frogger.width > elem.y)
+
+    if((frogger.x < elem.x + elem.width-45 &&
+        frogger.x + frogger.width > elem.x &&
+        frogger.y < elem.y + elem.height -45 &&
+        frogger.y + frogger.height > elem.y 
+       )){
+            clearInterval(    timmers )  
+         
+            console.log("frogger =" +frogger.x + "," + frogger.y + ":: " +frogger.width + "," + frogger.height+" (" +frogger.offsetLeft + "," + frogger.offsetTop+")" )
+            console.log("car     =" +cars1[2].x + ","+ cars1[2].y+ ":: " +cars1[2].width + "," + cars1[2].height)
+           
+        }
+    });
+}
+
+function hitObstacle( frogger,obstacle, offset ){
+    obstacle.forEach(elem => {    
+        f = false
+    x = ( frogger.x < elem.x + elem.width && frogger.x + frogger.width >= elem.x)
+    y =(frogger.y < elem.y + elem.width && frogger.y + frogger.width > elem.y)
+
+    if((frogger.x < elem.x + elem.width &&
+        frogger.x + frogger.width > elem.x &&
+        frogger.y < elem.y + elem.height -45 &&
+        frogger.y + frogger.height > elem.y 
+       )){
+           timmers.forEach(t => {clearInterval(t) });
+            console.log("frogger =" +frogger.x + "," + frogger.y + ":: " +frogger.width + "," + frogger.height+" (" +frogger.offsetLeft + "," + frogger.offsetTop+")" )
+            console.log("car     =" +obstacle[2].x + ","+ obstacle[2].y+ ":: " +obstacle[2].width + "," + obstacle[2].height)
+           
+        }
+    });
+}
+
+setInterval(()=>{
+    // console.log("frogger =" +frogger.x + "," + frogger.y + ":: " +frogger.width + "," + frogger.height+" (" +frogger.offsetLeft + "," + frogger.offsetTop+")" )
+   } ,1000)
+
     function musicMode() {
         if (myMusic.paused || myMusic.ended)
             myMusic.play();
@@ -98,84 +180,44 @@ document.addEventListener('DOMContentLoaded', () => {
             myMusic.pause();
     }
 
+    function startIntervals(){
+        timmers.push(setInterval(() => { movecars(turtles1, -10, 165) }, 2000))
+        timmers.push(setInterval(() => { movecars(logs1, 10, 120) }, 2000))
+        timmers.push(setInterval(() => { movecars(logs2, -10, 337) }, 2000))
+        timmers.push(setInterval(() => { movecars(logs3, 10, 195) }, 2000))
+        timmers.push(setInterval(() => { movecars(turtles2, -10, 110) }, 2000))
+        timmers.push(  setInterval(() => { movecars(cars1, -45, 55) }, 2000))
+        timmers.push(setInterval(() => { movecars(cars2, 10, 55) }, 2000))
+        timmers.push (setInterval(() => { movecars(cars3, -10, 55) }, 2000))
+        timmers.push (setInterval(() => { movecars(cars4, 10, 55) }, 2000))
+        timmers.push (setInterval(() => { movecars(lorrys, -10, 84) }, 2000))
+        timmers.push(setInterval(()=>{
+              hitObstacle(frogger,cars1,45)
+              hitObstacle(frogger,cars2,45)
+              hitObstacle(frogger,cars3,45)
+              hitObstacle(frogger,cars4,45)
+            hitObstacle(frogger,lorrys,45)
+
+              hitObstacle(frogger,turtles1,45)
+
+          },500))
+    }
+
     function startGame() {
         if (play == false) {
             play = true;
-            document.getElementsByClassName('title')[0].style.visibility = "hidden";
+            musicMode();
+                        // document.getElementsByClassName('title')[0].style.visibility = "hidden";
+
+        startIntervals()
         }
     }
-
-    speed = -10
-
-    function movecars(lst, speed, dir) {
-        lst.forEach(car => {
-            // console.log(car.offsetLeft)
-            n = car.offsetLeft + speed
-            car.style.left = n + "px";
-            if (n > 660) {
-                car.style.left = -10 + "px";
-            }
-            if (n < -20) {
-                car.style.left = 660 + "px";
-            }
-        })
-    }
-
-
-    function moveFrogger(e) {
-        switch (e.code) {
-            case 'ArrowUp':
-                frogger.src = "images/player-up.png"
-                if (frogger.offsetTop == 425)
-                    frogger.style.top = frogger.offsetTop - 35 + "px"
-                else
-                    frogger.style.top = frogger.offsetTop - 45 + "px"
-                break;
-            case 'ArrowDown':
-                frogger.src = "images/player-down.png"
-                if (frogger.offsetTop == 390)
-                frogger.style.top = frogger.offsetTop + 35 + "px"
-                else
-                frogger.style.top = frogger.offsetTop + 45 + "px"
-                break;
-            case 'ArrowLeft':
-                frogger.src = "images/player-left.png"
-                frogger.style.left = frogger.offsetLeft - 45 + "px"
-                break;
-            case 'ArrowRight':
-                frogger.src = "images/player-right.png"
-                frogger.style.left = frogger.offsetLeft + 45 + "px"
-                break;
-            default:
-                break;
-        }
-
-    }
-    setInterval(() => {
-        movecars(car1s, speed, "left");
-    }, 200)
-    setInterval(() => {
-        movecars(car2s, -speed, "right");
-    }, 200)
-    setInterval(() => {
-        movecars(car3s, speed, "left");
-    }, 200)
-    setInterval(() => {
-        movecars(car4s, -speed, "left");
-    }, 200)
-    setInterval(() => {
-        movecars(lorrys, speed, "left");
-    }, 200)
-
-
 
 
     pauseButton.addEventListener('click', () => {
         if (play == true) {
             play = false;
-            alert("Game pause");
-            musicMode();
-            endGame();
+            myMusic.pause();
         }
     });
 
@@ -184,8 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     soundButton.addEventListener('click', musicMode);
     playButton.addEventListener('click', startGame);
-    playButton.addEventListener('click', musicMode);
-
     document.addEventListener('keyup', moveFrogger);
 
 })

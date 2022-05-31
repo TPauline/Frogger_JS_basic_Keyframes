@@ -18,7 +18,7 @@ button {
 }
 
 .buttons {    
-    width: 660px;
+    width: 658px;
     height: 50px;
     display: flex;
     margin: auto;
@@ -31,50 +31,52 @@ button {
 
 .gameWindow {
     height: 700px;
-    width: 660px;
+    width: 658px;
     align-self: center;
     margin: auto;
     border: 5px solid goldenrod;
     border-style: groove;
-    position: relative;
     overflow: hidden;
+    position: relative;
+
 
 }
 
 .gameArea {
     background: url(images/background.png);
     background-repeat: no-repeat;
-    width: 660px;
+    width: 658px;
     height: 720px;
     position: relative;
 }
 
 
-.car1{
+.cars1{
     position: absolute;
-    top: 77%;
+    top: 560px;
 }
 
-.car2{
+.cars2{
     position: absolute;
-    top: 70%;
-    margin-left:10px ;
+    top:515px;
+    margin-left:45px ;
 }
 
-.car3{
+.cars3{
     position: absolute;
-    top: 64%;
+    top: 470px;
+    margin-left:45px ;
+
 }
 
-.car4{
+.cars4{
     position: absolute;
-    top: 58%;
+    top:425px;
 }
 
 .lorry{
     position: absolute;
-    top: 53%;
-    margin-right: 500px;
+    top: 390px;
 }
  
 .logs1{
@@ -102,7 +104,7 @@ button {
 
 .turtles2{
     position: absolute;
-    top: 165px;
+    top: 169px;
     display: flex;
 
 }
@@ -110,7 +112,8 @@ button {
     width: 45px;
     height: 45px;
     position: absolute;
-    top: 605px;
+    /* top: 603px; */
+    top:345px;
     left: 307.5px;
     z-index: 1;
 }
