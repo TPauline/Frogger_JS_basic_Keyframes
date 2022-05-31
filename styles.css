@@ -112,8 +112,8 @@ button {
     width: 45px;
     height: 45px;
     position: absolute;
-    /* top: 603px; */
-    top:345px;
+    top: 603px;
+    /* top:345px; */
     left: 307.5px;
     z-index: 1;
 }
