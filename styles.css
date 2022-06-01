@@ -115,7 +115,7 @@ button {
     top: 603px;
     /* top:345px; */
     left: 307.5px;
-    z-index: 1;
+    z-index: 9;
 }
 
 .lives{
