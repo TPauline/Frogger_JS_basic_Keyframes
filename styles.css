@@ -173,9 +173,30 @@ button {
     left: 565px;
 }
 
-.logs2label-1-up-high-score{
+.label-1-up-high-score{
     position: absolute;
+    left:65px;
 }
+
+#points{
+    color: white;
+    position: absolute;
+    top:20px;
+    font-size: 35px;
+    font-family: 'Common Pixel', sans-serif;
+    left:50px;
+
+}
+
+#hi-score{
+    color: white;
+    position: absolute;
+    top:20px;
+    font-size: 35px;
+    font-family: 'Common Pixel', sans-serif;
+    left:230px;
+}
+
 #timmer{
     position: absolute;
     background-color: black;

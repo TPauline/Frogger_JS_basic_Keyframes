@@ -10,13 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const cars4 = document.querySelectorAll('.cars4')
     const lorrys = document.querySelectorAll('.lorry')
     const frogger = document.querySelector('.frogger');
+    const points = document.querySelector('#points');
+    const hi_score = document.querySelector('#hi-score');
+
+
     timmers = [];
-    froggerObj = { initialX: 307.5, initialY: 603, lives: 0, livesY: 84 }
+    froggerObj = { initialX: 307.5, initialY: 603, points:0, lives: 0, livesY: 84 }
     backgroundMusic = new Audio();  win = new Audio(); lose = new Audio(); popMusic = new Audio();
     backgroundMusic.src = 'sounds/heckincrows.ogg'; lose.src = 'sounds/machinePowerOff.ogg'; popMusic.src = 'sounds/pop.ogg';
     play = false;  carsLeft = 0;
     xDown = null;
     var yDown = null;
+
+function points_scores(div, num ){
+    const fivetBits =  num.toString().padStart(5, '0')
+    div.innerHTML =fivetBits;
+}
 
     function musicMode() {
         if (backgroundMusic.paused || backgroundMusic.ended) backgroundMusic.play();
@@ -84,12 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(t)
         backgroundMusic.pause()
     });}
+
     function movecars(lst, speed, space) {
         lst.forEach(car => {
             if (hitObstacle(frogger, car) ) {
                 clearTimmers()
                 return
             }
+
             n = car.offsetLeft + speed
             car.style.left = n + "px";
             if (n > (658 + space)) {
@@ -129,20 +140,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             default:
                 break;
+                
         }
+
+        
+        froggerObj.points +=10
+        points_scores(points, froggerObj.points )
     }
 
     function startIntervals() {
-        timmers.push(setInterval(() => { movecars(turtles1, -10, 45) }, 1000))
-        timmers.push(setInterval(() => { movecars(logs1, 10, 120) }, 1000))
-        timmers.push(setInterval(() => { movecars(logs2, -10, 337) }, 1000))
-        timmers.push(setInterval(() => { movecars(logs3, 10, 195) }, 1000))
-        timmers.push(setInterval(() => { movecars(turtles2, -10, 45) }, 1000))
-        timmers.push(setInterval(() => { movecars(cars1, -45, 45) }, 1000))
-        timmers.push(setInterval(() => { movecars(cars2, 10, 45) }, 1000))
-        timmers.push(setInterval(() => { movecars(cars3, -10, 45) }, 1000))
-        timmers.push(setInterval(() => { movecars(cars4, 10, 45) }, 1000))
-        timmers.push(setInterval(() => { movecars(lorrys, -10, 84) }, 1000))
+        timmers.push(setInterval(() => { movecars(turtles1, -10, 45) }, 500))
+        timmers.push(setInterval(() => { movecars(logs1, 10, 120) }, 500))
+        timmers.push(setInterval(() => { movecars(logs2, -10, 337) }, 500))
+        timmers.push(setInterval(() => { movecars(logs3, 10, 195) }, 500))
+        timmers.push(setInterval(() => { movecars(turtles2, -10, 45) }, 500))
+        timmers.push(setInterval(() => { movecars(cars1, -10, 45) }, 500))
+        timmers.push(setInterval(() => { movecars(cars2, 10, 45) }, 500))
+        timmers.push(setInterval(() => { movecars(cars3, -10, 45) }, 500))
+        timmers.push(setInterval(() => { movecars(cars4, 10, 45) }, 500))
+        timmers.push(setInterval(() => { movecars(lorrys, -10, 84) }, 500))
     }
 
     function startGame() {
